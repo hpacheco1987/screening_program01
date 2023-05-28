@@ -1,0 +1,118 @@
+
+// Exemplo de objeto para o endereço
+const endereco = {
+  rua: '',
+  numero: '',
+  bairro: '',
+  cidade: '',
+  estado: ''
+};
+
+// Exemplo de objeto para o cabeçalho
+const cabecalho = {
+  cliente: '',
+  ordemServico: '',
+  endereco: endereco,
+  cnpj: '',
+  telefone: '',
+  email: '',
+  data: ''
+};
+
+
+
+// Exemplo de objeto para um extintor
+const extintor = {
+  tipo: '',
+  carga: '',
+  anoFabricacao: '',
+  norma: ''
+};
+
+// Exemplo de objeto para uma mangueira
+const mangueira = {
+  bitola: '',
+  tamanho: '',
+  marca: ''
+};
+
+// Exemplo de objeto para o registro de materiais
+const registroMateriais = {
+  extintores: [],
+  mangueiras: []
+};
+
+// Exemplo de adição de um extintor ao registro de materiais
+const extintor1 = {
+  tipo: 'AP',
+  carga: '10 litros',
+  anoFabricacao: '2013',
+  norma: '15808'
+};
+
+registroMateriais.extintores.push(extintor1);
+
+// Exemplo de adição de uma mangueira ao registro de materiais
+const mangueira1 = {
+  bitola: '1.1/2"',
+  tamanho: '15 metros',
+  marca: 'Exemplo de marca'
+};
+
+registroMateriais.mangueiras.push(mangueira1);
+
+
+
+
+// Função para gerar o relatório
+function gerarRelatorio(cabecalho, registroMateriais) {
+  // Aqui você pode utilizar alguma biblioteca de template ou manipulação de strings para formatar o relatório conforme sua necessidade
+  // Abaixo, um exemplo simples de como formatar o relatório em uma única string
+  let relatorio = '';
+
+  // Adicionar cabeçalho ao relatório
+  relatorio += 'Cabeçalho do Relatório:\n';
+  relatorio += 'Cliente: ' + cabecalho.cliente + '\n';
+  relatorio += 'Ordem de Serviço: ' + cabecalho.ordemServico + '\n';
+  relatorio += 'Endereço: ' + JSON.stringify(cabecalho.endereco) + '\n';
+  relatorio += 'CNPJ: ' + cabecalho.cnpj + '\n';
+  relatorio += 'Telefone: ' + cabecalho.telefone + '\n';
+  relatorio += 'Email: ' + cabecalho.email + '\n';
+  relatorio += 'Data: ' + cabecalho.data + '\n\n';
+
+  // Adicionar extintores ao relatório
+  relatorio += 'Extintores:\n';
+  for (let i = 0; i < registroMateriais.extintores.length; i++) {
+    const extintor = registroMateriais.extintores[i];
+    relatorio += 'Tipo: ' + extintor.tipo + '\n';
+    relatorio += 'Carga: ' + extintor.carga + '\n';
+    relatorio += 'Ano de Fabricação: ' + extintor.anoFabricacao + '\n';
+    relatorio += 'Norma: ' + extintor.norma + '\n\n';
+  }
+
+  // Adicionar mangueiras ao relatório
+  relatorio += 'Mangueiras:\n';
+  for (let i = 0; i < registroMateriais.mangueiras.length; i++) {
+    const mangueira = registroMateriais.mangueiras[i];
+    relatorio += 'Bitola: ' + mangueira.bitola + '\n';
+    relatorio += 'Tamanho: ' + mangueira.tamanho + '\n';
+    relatorio += 'Marca: ' + mangueira.marca + '\n\n';
+  }
+
+  return relatorio;
+}
+
+// Exemplo de chamada da função para gerar o relatório
+const relatorio = gerarRelatorio(cabecalho, registroMateriais);
+console.log(relatorio); // Exibir o relatório no console (você pode adaptar para exibir na tela do aplicativo)
+
+
+
+
+
+
+
+
+
+
+
