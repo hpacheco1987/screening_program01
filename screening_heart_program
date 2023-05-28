@@ -1,29 +1,72 @@
-function extintor(tipo, carga, fabricacao, norma, teste, ultimoTeste) {
-  return {
-    tipo,
-    carga,
-    fabricacao,
-    norma,
-    teste,
-    ultimoTeste,
-    normaExtintor() {
-      if (this.tipo === 'AP' && this.fabricacao < 2013) {
-        this.norma = 11715;
-      } else if (this.tipo === 'AP' && this.fabricacao >= 2013) {
-        this.norma = 15808;
-      } else if ((this.tipo === 'PQS' || this.tipo === 'ABC') && this.fabricacao < 2013) {
-        this.norma = 10721;
-      } else if ((this.tipo === 'PQS' || this.tipo === 'ABC') && this.fabricacao >= 2013) {
-        this.norma = 15808;
-      } else if (this.tipo === 'CO2' && this.fabricacao < 2013) {
-        this.norma = 12636;
-      } else if (this.tipo === 'CO2' && this.fabricacao >= 2013) {
-        this.norma = 15808;
-      }
-      return this.norma;
-    },
-  };
+// function extintor(tipo,carga, fabricacao, norma, teste, ultimoTeste) {
+//   return {
+//     tipo, carga, fabricacao, norma, teste, ultimoTeste,
+
+//     //Método que retorna a norma de acordo com a fabricação
+//     //Faça este método se comportar como um atributo do objeto
+//     normaExtintor(fabricacao, norma, tipo) {
+//       if (tipo === 'AP' && fabricacao < 2013) { norma = 11715 } else if (tipo === 'AP' && fabricacao >= 2013) { norma = 15808 };
+//       if ((tipo === 'PQS' || tipo === 'ABC') && fabricacao < 2013) { norma = 10721 } else if ((tipo === 'PQS' || tipo === 'ABC') && fabricacao >= 2013) { norma = 15808 };
+//       if (tipo === 'CO2' && fabricacao < 2013) { norma = 12636 } else if (tipo === 'CO2' && fabricacao >= 2013) { norma = 15808 };
+      
+
+//     return norma },
+  
+//   }
+// }
+
+
+
+
+
+
+// CHAT GPT
+const registrationInitialization = (function () {
+  let tipoExtintor = 'AP';
+  let cargaExtintor = '10l';
+  let fabricacaoExtintor = 2000;
+  let normaExtintor = undefined;
+  let ultimoTesteExtintor = 2021;
+  let anoAtual = new Date; let ano = anoAtual.getFullYear(); 
+
+
+  function extintor(tipo=tipoExtintor, carga=cargaExtintor, fabricacao=fabricacaoExtintor, norma=normaExtintor, teste, ultimoTeste, ano) {
+    return {
+      tipo,
+      carga,
+      fabricacao,
+      norma,
+      teste,
+      ultimoTeste,
+      get normaExtintor() {
+        if (this.tipo === 'AP' && this.fabricacao < 2013) {
+          this.norma = 11715;
+        } else if (this.tipo === 'AP' && this.fabricacao >= 2013) {
+          this.norma = 15808;
+        } else if ((this.tipo === 'PQS' || this.tipo === 'ABC') && this.fabricacao < 2013) {
+          this.norma = 10721;
+        } else if ((this.tipo === 'PQS' || this.tipo === 'ABC') && this.fabricacao >= 2013) {
+          this.norma = 15808;
+        } else if (this.tipo === 'CO2' && this.fabricacao < 2013) {
+          this.norma = 12636;
+        } else if (this.tipo === 'CO2' && this.fabricacao >= 2013) {
+          this.norma = 15808;
+        }
+        return this.norma;
+      },
+      get testeExtintor() {
+        if ((ano - fabricacao) < 5 &&(ano - ultimoTeste)<5 ) { teste = false } else if((ano - fabricacao) >= 5){ teste = true };
+        
+      },
+      ano
+    };
+  }
+
+  const meuExtintor = extintor('AP', '2 kg', 2014);
+  console.log(meuExtintor.normaExtintor); // retorna 15808
+});
+
+var clickButton = true;
+if (clickButton === true) { registrationInitialization() } else if (clickButton !== true) {
+  console.log('Programa não inicia')
 }
-
-
-console.log(extintor('AP', '10l', 2000, norma, true, 17));
