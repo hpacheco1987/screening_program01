@@ -1,0 +1,29 @@
+function extintor(tipo, carga, fabricacao, norma, teste, ultimoTeste) {
+  return {
+    tipo,
+    carga,
+    fabricacao,
+    norma,
+    teste,
+    ultimoTeste,
+    normaExtintor() {
+      if (this.tipo === 'AP' && this.fabricacao < 2013) {
+        this.norma = 11715;
+      } else if (this.tipo === 'AP' && this.fabricacao >= 2013) {
+        this.norma = 15808;
+      } else if ((this.tipo === 'PQS' || this.tipo === 'ABC') && this.fabricacao < 2013) {
+        this.norma = 10721;
+      } else if ((this.tipo === 'PQS' || this.tipo === 'ABC') && this.fabricacao >= 2013) {
+        this.norma = 15808;
+      } else if (this.tipo === 'CO2' && this.fabricacao < 2013) {
+        this.norma = 12636;
+      } else if (this.tipo === 'CO2' && this.fabricacao >= 2013) {
+        this.norma = 15808;
+      }
+      return this.norma;
+    },
+  };
+}
+
+
+console.log(extintor('AP', '10l', 2000, norma, true, 17));
